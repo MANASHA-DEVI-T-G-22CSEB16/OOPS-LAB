@@ -1,0 +1,221 @@
+PROGRAM 1
+
+package javaapplication5;
+
+import java.util.*;
+
+public class Circle2 {
+    public static void main(String[] args) {
+        double r;
+        System.out.println("Printing default constructor value");
+        Circle c=new Circle();
+        System.out.println("Radius:"+ c.radius+ "\nColor:"+ c.color);
+        System.out.println(c.getArea());
+        Scanner obj2=new Scanner(System.in);
+        System.out.println("Enter radius");
+        r=obj2.nextDouble();
+        System.out.println("Printing from parameterized constructor");
+        Circle c1=new Circle(r);
+        System.out.println("Radius:"+ c1.radius);
+        c1.getcolor();
+        System.out.println(c1.getArea());
+        System.out.println("Printing with no constructor");
+        Circle c2=new Circle();
+        System.out.println(c2.getradius());
+        c2.getcolor();
+        System.out.println(c2.getArea());
+       
+       
+    }
+}
+class Circle
+{
+    double radius,area;
+    String color;
+    Circle()
+    {
+        radius=1.0;
+        color="red";
+    }
+    Circle(double r)
+    {
+        radius=r;
+    }
+    double getradius()
+    {
+        Scanner obj=new Scanner(System.in);
+        System.out.println("Enter radius");
+        radius=obj.nextDouble();
+        System.out.println("Radius:");
+        return radius;
+    }
+    void getcolor(){
+        Scanner obj1=new Scanner(System.in);
+        System.out.println("Enter color");
+        color=obj1.next();
+         System.out.println("Color:"+ color);
+       
+    }
+    double getArea()
+    {
+        area=3.14*radius*radius;
+        System.out.println("Area:");
+        return area;
+    }
+   
+           
+}
+
+PROGRAM 2
+package javaapplication5;
+
+import java.util.*;
+
+public class JavaApplication5
+
+{
+
+    public static void main(String[] args) 
+
+    {
+
+      String type,n;
+
+      int p,c;
+
+      double num;
+
+      Scanner obj= new Scanner(System.in);
+
+      System.out.println("Enter The Type(D-Domestic C-Commercial):");
+
+      type=obj.next();
+
+      System.out.println("Enter name:");
+
+      n=obj.next();
+
+      System.out.println("Enter consumer no.:");
+
+      num=obj.nextDouble();
+
+      System.out.println("Enter previous month reading:");
+
+      p=obj.nextInt();
+
+      System.out.println("Enter current month reading:");
+
+      c=obj.nextInt();
+
+      Electricity x= new Electricity(n,num,p,c);
+
+      System.out.println(x);
+
+      if("D"==type){
+
+          x.domestic_bill();
+
+      }
+
+      else{
+
+          x.Commercial_bill();
+
+      }
+
+      
+
+    }
+
+    
+
+}
+
+class Electricity
+
+{
+
+    String cname;
+
+    double cnum;
+
+    int pmr;
+
+    int cmr;
+
+    int unit;
+
+    float amt;
+
+    Electricity(String n,double num, int p, int c )
+
+    {
+
+        cname=n;
+
+        cnum=num;
+
+        pmr=p;
+
+        cmr=c;
+
+        unit=c-p;
+
+    }
+
+    public String toString()
+
+    {
+
+        return ("Consumer name:"+ cname + "\nConsumer no:"+ cnum); 
+
+    }
+
+    void domestic_bill()
+
+    {
+
+        if(unit<=100)
+
+            amt= (float) (unit*1.5);
+
+        else if(unit>100 && unit<=200)
+
+            amt= (float) (150+((unit-100)*3));
+
+        else if(unit>200 && unit<=500)
+
+            amt= (float) (450+((unit-200)*4.5));
+
+        else
+
+            amt= (float) (1800+((unit-500)*7));
+
+        System.out.println("Bill amount:"+ amt);
+
+    }
+
+     void Commercial_bill()
+
+    {
+
+        if(unit<=100)
+
+            amt= (float) (unit*2.5);
+
+        else if(unit>100 && unit<=200)
+
+            amt= (float) (250+((unit-100)*5));
+
+        else if(unit>200 && unit<=500)
+
+            amt= (float) (750+((unit-200)*6.5));
+
+        else
+
+            amt= (float) (2700+((unit-500)*9));
+
+        System.out.println("Bill amount:"+ amt);
+
+    }
+}
