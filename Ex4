@@ -1,0 +1,161 @@
+PROGRAM 1
+package javaapplication1;
+
+import java.util.*;
+
+public class JavaApplication1 {
+    public static void main(String[] args) {
+        double a1,a2,a3,b1,b2,b3,b4;
+        Scanner sc= new Scanner(System.in);
+        System.out.println("Enter the mark for student A in 3 subjects:");
+        System.out.print("Subject 1:");
+        a1=sc.nextDouble();
+        System.out.print("Subject 2:");
+        a2=sc.nextDouble();
+        System.out.print("Subject 3:");
+        a3=sc.nextDouble();
+        A obj=new A(a1,a2,a3);
+        System.out.println("The percentage of student A: "+obj.getpercentage()+"%");
+        System.out.println("Enter the mark for student B in 4 subjects :");
+        System.out.print("Subject 1:");
+        b1=sc.nextDouble();
+        System.out.print("Subject 2:");
+        b2=sc.nextDouble();
+        System.out.print("Subject 3:");
+        b3=sc.nextDouble();
+        System.out.print("Subject 4:");
+        b4=sc.nextDouble();       
+        B obj1=new B(b1,b2,b3,b4);
+        System.out.println("The percentage of student B: "+obj1.getpercentage()+"%");
+        
+    }
+}
+abstract class marks
+{
+    public abstract double getpercentage();
+}
+class A extends marks{
+    double m1,m2,m3,tot;
+    A(double m1,double m2,double m3){
+        this.m1=m1;
+        this.m2=m2;
+        this.m3=m3;
+    }
+    @Override
+    public double getpercentage(){
+        tot=m1+m2+m3;
+        return(tot/300)*100;
+    }
+}
+class B extends marks{
+    double m1,m2,m3,m4,tot;
+    B(double m1,double m2,double m3,double m4){
+        this.m1=m1;
+        this.m2=m2;
+        this.m3=m3;
+        this.m4=m4;
+    }
+    @Override
+    public double getpercentage(){
+        tot=m1+m2+m3+m4;
+        return(tot/400)*100;
+    }
+}
+
+
+
+PROGRAM 2
+interface QueueOperations<T> {
+    void enqueue(T item);
+    T dequeue();
+    T peek();
+    boolean isEmpty();
+    boolean isFull();
+}
+
+class MyQueue<T> implements QueueOperations<T> {
+    private T[] queueArray;
+    private int front;
+    private int rear;
+    private int capacity;
+
+    public MyQueue(int capacity) {
+        this.capacity = capacity;
+        this.queueArray = (T[]) new Object[capacity];
+        this.front = -1;
+        this.rear = -1;
+    }
+
+    @Override
+    public void enqueue(T item) {
+        if (isFull()) {
+            System.out.println("Queue is full. Cannot enqueue.");
+            return;
+        }
+
+        rear = (rear + 1) % capacity;
+        queueArray[rear] = item;
+
+        if (front == -1) {
+            front = rear;
+        }
+    }
+
+    @Override
+    public T dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty. Cannot dequeue.");
+            return null;
+        }
+
+        T item = queueArray[front];
+        if (front == rear) {
+            front = -1;
+            rear = -1;
+        } else {
+            front = (front + 1) % capacity;
+        }
+        return item;
+    }
+
+    @Override
+    public T peek() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty. Cannot peek.");
+            return null;
+        }
+        return queueArray[front];
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return front == -1;
+    }
+
+    @Override
+    public boolean isFull() {
+        return (rear + 1) % capacity == front;
+    }
+}
+
+public class NewClass {
+    public static void main(String[] args) {
+        int queueCapacity = 5;
+        MyQueue<Integer> queue = new MyQueue<>(queueCapacity);
+
+        queue.enqueue(10);
+        queue.enqueue(20);
+        queue.enqueue(30);
+
+        System.out.println("Peek: " + queue.peek());
+
+        System.out.println("Dequeued: " + queue.dequeue());
+
+        queue.enqueue(40);
+        queue.enqueue(50);
+        queue.enqueue(60);  // This will fail as the queue is full
+
+        while (!queue.isEmpty()) {
+            System.out.println("Dequeued: " + queue.dequeue());
+        }
+    }
