@@ -1,0 +1,126 @@
+//PROGRAM 1
+package javaapplication3;
+import java.util.InputMismatchException;
+import java.util.*;
+
+
+public class GetIdAndAge {
+    
+    public static void main(String[] args) {
+        // TODO code application logic here
+        Scanner obj=new Scanner(System.in);
+        while(true){
+            try
+            {
+                System.out.print("Enter ID number (0-999): ");
+                int id = obj.nextInt();
+
+                if (id == 0) {
+                    break; 
+                }
+
+                if (id < 0 || id >=999) {
+                    throw new DataEntryException("Invalid ID number.It must be between 0 and 999.");
+                }
+
+                System.out.print("Enter an age (0-119): ");
+                int age = obj.nextInt();
+
+                if (age == 0) {
+                    break; 
+                }
+
+                if (age < 0 || age >=119) {
+                    throw new DataEntryException("Invalid age.It must be between 0 and 119.");
+                }
+                
+                System.out.println("Id: "+ id);
+                System.out.println("Age: "+age);
+            }
+            catch(DataEntryException e){
+                System.out.println("Data Entry Exception"+ e.getMessage());
+                
+            }
+            catch(InputMismatchException e)
+            {
+                System.out.println("Input Mismatch Exception"+e.getMessage());
+            }
+        }
+      
+    
+}
+class DataEntryException extends Exception{
+    DataEntryException(String msg){
+        super(msg);
+    }
+}
+
+
+
+
+//COMMON PROGRAM 
+package javaapplication3;
+
+import java.util.*;
+
+public class Excepdemo {
+    public static void main(String[] args) {
+        Scanner obj=new Scanner(System.in);
+        System.out.println("Exception Handling For Arithmetic Exception");
+        try{
+            System.out.println("Enter first number:");
+            int a=obj.nextInt();
+            System.out.println("Enter second number:");
+            int b=obj.nextInt();
+            int c=a/b;
+            System.out.println("The result is:"+c);
+            
+        }
+        catch(ArithmeticException e){
+            System.out.println("Arithmetic Exception"+e.getMessage());
+        }
+        System.out.println("_____________________________________");
+        System.out.println("Exception Handling For Array index Exception");
+        try{
+            System.out.println("Enter a number of elements in array");
+            int n=obj.nextInt();
+            int arr[]=new int[n];
+            System.out.println("Enter a number to be inserted");
+            int no=obj.nextInt();
+            arr[7]=no;
+            System.out.println("Inserted successfully");
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            System.out.println("Array Out of Index Exception"+e.getMessage());
+        }
+        System.out.println("____________________________________");
+        System.out.println("Exception Handling For Number Format Exception");
+        try{
+            System.out.println("Enter a string number to convert into number");
+            String str=obj.next();
+            int num = Integer.parseInt (str) ;
+            System.out.println(num);
+        } 
+        catch(NumberFormatException e)
+        {
+            System.out.println("Number format exception"+e.getMessage());
+        }
+        
+        System.out.println("____________________________________");
+        System.out.println("Exception Handling For String Index Exception");
+        try{
+            System.out.println("Enter A Word:");
+            String str=obj.next();
+            char c = str.charAt(10); // accessing 25th element
+            System.out.println(c);
+        }
+        catch(StringIndexOutOfBoundsException e) {
+            System.out.println("String Index Exception"+e.getMessage());
+        }
+        System.out.println("____________________________________");
+       
+        System.out.println("Exception Handling Executed Successfully");
+        
+    }
+    }
+    
